@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>割り勘計算</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="../../index.html" class="back-link">← アプリ一覧</a>
+      <h1>💰 割り勘計算</h1>
+      <p class="header-desc">幹事さんの味方！簡単割り勘計算ツール</p>
+    </header>
+
+    <!-- 合計金額 -->
+    <section class="card">
+      <h2>合計金額</h2>
+      <div class="input-group">
+        <span class="currency">¥</span>
+        <input type="number" id="totalAmount" placeholder="例: 30000" min="0" inputmode="numeric">
+      </div>
+      <div class="tax-tip-row">
+        <label class="checkbox-label">
+          <input type="checkbox" id="includeTax">
+          <span>+消費税10%</span>
+        </label>
+        <label class="checkbox-label">
+          <input type="checkbox" id="includeService">
+          <span>+サービス料10%</span>
+        </label>
+      </div>
+      <div id="adjustedTotal" class="adjusted-total"></div>
+    </section>
+
+    <!-- 計算モード -->
+    <section class="card">
+      <h2>計算モード</h2>
+      <div class="mode-tabs">
+        <button class="mode-tab active" data-mode="equal">均等割り</button>
+        <button class="mode-tab" data-mode="ratio">傾斜配分</button>
+        <button class="mode-tab" data-mode="item">個別入力</button>
+      </div>
+
+      <!-- 均等割りモード -->
+      <div id="mode-equal" class="mode-content active">
+        <div class="people-control">
+          <label>人数</label>
+          <div class="stepper">
+            <button class="stepper-btn" data-action="dec" data-target="equalPeople">−</button>
+            <input type="number" id="equalPeople" value="2" min="1" max="100" inputmode="numeric">
+            <button class="stepper-btn" data-action="inc" data-target="equalPeople">＋</button>
+          </div>
+        </div>
+        <div class="rounding-options">
+          <label>端数処理</label>
+          <select id="roundingMode">
+            <option value="ceil100">100円単位で切り上げ</option>
+            <option value="ceil10">10円単位で切り上げ</option>
+            <option value="floor100">100円単位で切り捨て</option>
+            <option value="floor10">10円単位で切り捨て</option>
+            <option value="round100">100円単位で四捨五入</option>
+            <option value="round10">10円単位で四捨五入</option>
+            <option value="exact">端数処理なし</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 傾斜配分モード -->
+      <div id="mode-ratio" class="mode-content">
+        <p class="mode-desc">役職や年齢に応じた傾斜配分ができます。</p>
+        <div id="ratioMembers"></div>
+        <button id="addRatioMember" class="btn-add">＋ メンバー追加</button>
+        <div class="preset-buttons">
+          <button class="btn-preset" data-preset="boss">上司多め</button>
+          <button class="btn-preset" data-preset="senior">先輩後輩</button>
+          <button class="btn-preset" data-preset="organizer">幹事割引</button>
+        </div>
+      </div>
+
+      <!-- 個別入力モード -->
+      <div id="mode-item" class="mode-content">
+        <p class="mode-desc">各人が注文したものを個別に入力して計算。</p>
+        <div id="itemMembers"></div>
+        <button id="addItemMember" class="btn-add">＋ メンバー追加</button>
+        <div id="sharedCostSection" class="shared-cost">
+          <label>共通費用（シェア料理等）</label>
+          <div class="input-group small">
+            <span class="currency">¥</span>
+            <input type="number" id="sharedCost" value="0" min="0" inputmode="numeric">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 計算ボタン -->
+    <button id="calcBtn" class="btn-calc">計算する</button>
+
+    <!-- 結果 -->
+    <section id="resultSection" class="card result-card" style="display:none;">
+      <h2>計算結果</h2>
+      <div id="resultContent"></div>
+      <div id="resultSummary" class="result-summary"></div>
+      <div class="result-actions">
+        <button id="copyBtn" class="btn-action">📋 結果をコピー</button>
+        <button id="resetBtn" class="btn-action btn-reset">🔄 リセット</button>
+      </div>
+    </section>
+
+    <!-- 履歴 -->
+    <section class="card">
+      <h2>計算履歴 <button id="clearHistory" class="btn-clear-history">クリア</button></h2>
+      <div id="historyList" class="history-list">
+        <p class="empty-history">まだ履歴がありません</p>
+      </div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

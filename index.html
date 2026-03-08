@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Apps</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #fff;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      text-align: center;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 40px;
+      font-size: 0.95rem;
+    }
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .app-card {
+      background: #fff;
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-decoration: none;
+      color: #333;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .app-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+    }
+    .app-icon {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+    .app-card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+    .app-card p {
+      font-size: 0.88rem;
+      color: #666;
+      line-height: 1.5;
+    }
+    @media (max-width: 480px) {
+      .container { padding: 24px 16px; }
+      h1 { font-size: 1.5rem; }
+      .app-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Web Apps</h1>
+    <p class="subtitle">便利なWebアプリ集</p>
+    <div class="app-grid">
+      <a href="apps/warikan/index.html" class="app-card">
+        <div class="app-icon">💰</div>
+        <h2>割り勘計算</h2>
+        <p>飲み会やイベントの代金を簡単に割り勘計算。傾斜配分や端数処理にも対応。</p>
+      </a>
+      <!-- 今後アプリを追加する場合はここにカードを追加 -->
+    </div>
+  </div>
+</body>
+</html>
